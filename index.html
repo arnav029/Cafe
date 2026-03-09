@@ -3,81 +3,1449 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Misal.co.in - Coming Soon</title>
+    <title>Misal.co.in — Maharashtra's Soul in a Bowl</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600&family=Tiro+Devanagari+Marathi:ital@0;1&display=swap" rel="stylesheet">
     <style>
+        /* ── Reset & Base ── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --saffron:    #E8560A;
+            --saffron-lt: #F7894A;
+            --turmeric:   #D4A017;
+            --cream:      #FDF6EC;
+            --cream-dk:   #F2E8D5;
+            --charcoal:   #1C1C1C;
+            --brown:      #6B3A1F;
+            --red:        #9B1C1C;
+            --gold:       #C8891F;
+            --text-soft:  #5A4030;
+        }
+        html { scroll-behavior: smooth; }
         body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
+            background-color: var(--cream);
+            color: var(--charcoal);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        section { width: 100%; }
+        a { text-decoration: none; color: inherit; }
+
+        /* ── Scrollbar ── */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--cream-dk); }
+        ::-webkit-scrollbar-thumb { background: var(--saffron); border-radius: 3px; }
+
+        /* ══════════════════════════════════════
+           NAV
+        ══════════════════════════════════════ */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 20px 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: transparent;
+            transition: background 0.4s, padding 0.4s, box-shadow 0.4s;
+        }
+        nav.scrolled {
+            background: rgba(253, 246, 236, 0.97);
+            padding: 14px 60px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+        }
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: var(--cream);
+            letter-spacing: -0.5px;
+            transition: color 0.4s;
+        }
+        nav.scrolled .nav-logo { color: var(--charcoal); }
+        .nav-logo span { color: var(--turmeric); }
+        .nav-links {
+            display: flex;
+            gap: 36px;
+            list-style: none;
+        }
+        .nav-links a {
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.85);
+            transition: color 0.3s;
+        }
+        nav.scrolled .nav-links a { color: var(--text-soft); }
+        .nav-links a:hover { color: var(--saffron); }
+        .nav-cta {
+            background: var(--saffron);
+            color: #fff !important;
+            padding: 10px 24px;
+            border-radius: 3px;
+            letter-spacing: 1px !important;
+            transition: background 0.3s !important;
+        }
+        .nav-cta:hover { background: var(--brown) !important; }
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+        .hamburger span {
+            width: 26px; height: 2px;
+            background: var(--cream);
+            display: block;
+            transition: background 0.4s;
+            border-radius: 2px;
+        }
+        nav.scrolled .hamburger span { background: var(--charcoal); }
+
+        /* ══════════════════════════════════════
+           HERO
+        ══════════════════════════════════════ */
+        #hero {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: var(--charcoal);
+        }
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 70% 50%, #9B2E00 0%, #3D1000 50%, #1C1C1C 100%);
+        }
+        .hero-pattern {
+            position: absolute;
+            inset: 0;
+            opacity: 0.07;
+            background-image:
+                repeating-conic-gradient(from 0deg at 50% 50%, transparent 0deg 30deg, rgba(255,255,255,0.5) 30deg 31deg),
+                repeating-conic-gradient(from 15deg at 50% 50%, transparent 0deg 30deg, rgba(255,200,0,0.3) 30deg 31deg);
+            background-size: 120px 120px;
+        }
+        .hero-dots {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .hero-dots::before, .hero-dots::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            background: var(--saffron);
+            opacity: 0.12;
+        }
+        .hero-dots::before { width: 600px; height: 600px; top: -200px; right: -100px; }
+        .hero-dots::after  { width: 300px; height: 300px; bottom: -80px; left: -60px; }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 0 20px;
+            max-width: 900px;
+        }
+        .hero-marathi {
+            font-family: 'Tiro Devanagari Marathi', serif;
+            font-size: 1.1rem;
+            color: var(--turmeric);
+            letter-spacing: 4px;
+            margin-bottom: 24px;
+            opacity: 0;
+            animation: fadeUp 1s 0.2s forwards;
+        }
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3.2rem, 8vw, 7rem);
+            font-weight: 900;
+            color: var(--cream);
+            line-height: 1.05;
+            letter-spacing: -2px;
+            opacity: 0;
+            animation: fadeUp 1s 0.5s forwards;
+        }
+        .hero-title em {
+            font-style: italic;
+            color: var(--saffron-lt);
+        }
+        .hero-subtitle {
+            margin-top: 28px;
+            font-size: 1.15rem;
+            color: rgba(255,255,255,0.6);
+            font-weight: 300;
+            line-height: 1.7;
+            max-width: 560px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0;
+            animation: fadeUp 1s 0.8s forwards;
+        }
+        .hero-divider {
+            width: 60px;
+            height: 3px;
+            background: var(--turmeric);
+            margin: 36px auto;
+            opacity: 0;
+            animation: fadeUp 1s 1s forwards;
+        }
+        .hero-btns {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeUp 1s 1.2s forwards;
+        }
+        .btn-primary {
+            background: var(--saffron);
+            color: #fff;
+            padding: 16px 36px;
+            border-radius: 3px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: background 0.3s, transform 0.2s;
+        }
+        .btn-primary:hover { background: #c44700; transform: translateY(-2px); }
+        .btn-outline {
+            border: 1.5px solid rgba(255,255,255,0.35);
+            color: rgba(255,255,255,0.85);
+            padding: 16px 36px;
+            border-radius: 3px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: border-color 0.3s, color 0.3s, transform 0.2s;
+        }
+        .btn-outline:hover { border-color: var(--turmeric); color: var(--turmeric); transform: translateY(-2px); }
+        .scroll-hint {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            /* Soft Cream Color (Like Pav) */
-            background-color: #f9f7f2; 
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            color: #333;
-            text-align: center;
+            gap: 8px;
+            color: rgba(255,255,255,0.35);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeIn 1s 2s forwards;
+        }
+        .scroll-hint .arrow {
+            width: 20px; height: 20px;
+            border-right: 1.5px solid rgba(255,255,255,0.35);
+            border-bottom: 1.5px solid rgba(255,255,255,0.35);
+            transform: rotate(45deg);
+            animation: bounce 1.5s infinite;
         }
 
-        .container {
+        /* ══════════════════════════════════════
+           SECTION COMMON
+        ══════════════════════════════════════ */
+        .section-tag {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--saffron);
+            margin-bottom: 14px;
+        }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.2rem, 5vw, 3.8rem);
+            font-weight: 900;
+            color: var(--charcoal);
+            line-height: 1.1;
+            letter-spacing: -1px;
+        }
+        .section-body {
+            font-size: 1.05rem;
+            color: var(--text-soft);
+            line-height: 1.8;
             max-width: 600px;
+        }
+        .ornament {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .ornament-line {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--turmeric), transparent);
+            max-width: 80px;
+        }
+        .ornament-diamond {
+            width: 8px; height: 8px;
+            background: var(--turmeric);
+            transform: rotate(45deg);
+        }
+
+        /* ══════════════════════════════════════
+           INTRO BAND
+        ══════════════════════════════════════ */
+        #intro {
+            background: var(--saffron);
+            padding: 28px 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 60px;
+            overflow: hidden;
+        }
+        .intro-stat {
+            text-align: center;
+            color: #fff;
+        }
+        .intro-stat .num {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-weight: 900;
+            display: block;
+            line-height: 1;
+        }
+        .intro-stat .label {
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.85;
+            margin-top: 4px;
+        }
+        .intro-sep {
+            width: 1px;
+            height: 50px;
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* ══════════════════════════════════════
+           MISAL 101
+        ══════════════════════════════════════ */
+        #misal101 {
+            padding: 120px 60px;
+            background: var(--cream);
+        }
+        .misal101-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .misal101-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            margin-bottom: 80px;
+        }
+        .misal101-visual {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        /* CSS Bowl Illustration */
+        .bowl {
+            position: relative;
+            width: 280px;
+            height: 280px;
+            animation: float 5s ease-in-out infinite;
+        }
+        .bowl-plate {
+            position: absolute;
+            bottom: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 260px;
+            height: 50px;
+            background: linear-gradient(180deg, #C8891F, #8B5E0A);
+            border-radius: 50%;
+        }
+        .bowl-body {
+            position: absolute;
+            bottom: 20px; left: 50%;
+            transform: translateX(-50%);
+            width: 230px;
+            height: 160px;
+            background: linear-gradient(180deg, #E0612B 0%, #9B2E00 100%);
+            border-radius: 0 0 115px 115px / 0 0 80px 80px;
+            overflow: hidden;
+        }
+        .bowl-liquid {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 70%;
+            background: linear-gradient(180deg, #D4580F 0%, #8B2000 100%);
+        }
+        .bowl-rim {
+            position: absolute;
+            top: 35px; left: 50%;
+            transform: translateX(-50%);
+            width: 230px;
+            height: 24px;
+            background: linear-gradient(180deg, #6B3A1F, #4A2510);
+            border-radius: 50%;
+        }
+        .bowl-farsan {
+            position: absolute;
+            top: -30px; left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 60px;
+        }
+        .farsan-dot {
+            position: absolute;
+            border-radius: 50%;
+            background: var(--turmeric);
+        }
+        .sev-line {
+            position: absolute;
+            height: 3px;
+            background: linear-gradient(90deg, #D4A017, #F0C040);
+            border-radius: 2px;
+        }
+        .bowl-pav {
+            position: absolute;
+            bottom: -15px; right: -30px;
+            width: 90px;
+            height: 55px;
+            background: linear-gradient(135deg, #F5E6C3, #E8D4A0);
+            border-radius: 45px 45px 8px 8px;
+            box-shadow: 2px 2px 8px rgba(0,0,0,0.15);
+        }
+        .bowl-pav::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 15%;
+            right: 15%;
+            height: 1.5px;
+            background: rgba(0,0,0,0.1);
+            transform: translateY(-50%);
+        }
+        .bowl-lemon {
+            position: absolute;
+            bottom: 10px; left: -20px;
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(circle at 35% 35%, #F9E04B, #D4B800);
+            border-radius: 50%;
+            box-shadow: 1px 2px 6px rgba(0,0,0,0.12);
+        }
+        .bowl-glow {
+            position: absolute;
+            inset: -20px;
+            background: radial-gradient(circle, rgba(232,86,10,0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        .ingredients-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .ingredient-card {
+            background: var(--cream-dk);
+            border-radius: 4px;
+            padding: 28px 24px;
+            border-left: 3px solid transparent;
+            transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+            cursor: default;
+        }
+        .ingredient-card:hover {
+            border-color: var(--saffron);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(232,86,10,0.1);
+        }
+        .ing-icon { font-size: 2rem; margin-bottom: 12px; display: block; }
+        .ing-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--charcoal);
+            margin-bottom: 6px;
+        }
+        .ing-desc { font-size: 0.88rem; color: var(--text-soft); line-height: 1.6; }
+
+        /* ══════════════════════════════════════
+           REGIONAL WARS
+        ══════════════════════════════════════ */
+        #regions {
+            background: var(--charcoal);
+            padding: 120px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+        .regions-bg-pattern {
+            position: absolute;
+            inset: 0;
+            opacity: 0.03;
+            background-image: repeating-linear-gradient(
+                45deg,
+                #fff 0, #fff 1px, transparent 0, transparent 50%
+            );
+            background-size: 20px 20px;
+        }
+        .regions-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        .regions-header { text-align: center; margin-bottom: 70px; }
+        .regions-header .section-title { color: var(--cream); }
+        .regions-header .section-body { color: rgba(255,255,255,0.5); margin: 0 auto; }
+        .regions-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+        .region-card {
+            padding: 40px 28px;
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+            cursor: default;
+            transition: border-color 0.3s, transform 0.3s;
+            background: rgba(255,255,255,0.03);
+        }
+        .region-card:hover { border-color: var(--saffron); transform: translateY(-6px); }
+        .region-card:hover .region-accent { opacity: 1; }
+        .region-accent {
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            opacity: 0.5;
+            transition: opacity 0.3s;
+        }
+        .region-card:nth-child(1) .region-accent { background: #A8C5A0; }
+        .region-card:nth-child(2) .region-accent { background: var(--saffron); }
+        .region-card:nth-child(3) .region-accent { background: var(--red); }
+        .region-card:nth-child(4) .region-accent { background: var(--turmeric); }
+        .region-city {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: var(--cream);
+            margin-bottom: 4px;
+        }
+        .region-variety {
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--turmeric);
+            margin-bottom: 20px;
+            display: block;
+        }
+        .heat-meter { display: flex; gap: 4px; margin-bottom: 20px; align-items: center; }
+        .heat-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.15);
+        }
+        .heat-dot.active { background: var(--saffron); }
+        .heat-dot.red { background: var(--red); }
+        .region-desc { font-size: 0.9rem; color: rgba(255,255,255,0.55); line-height: 1.7; }
+        .region-tag {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 6px 14px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 2px;
+            font-size: 0.72rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.4);
+        }
+        .region-card:hover .region-tag { border-color: var(--saffron); color: var(--saffron-lt); }
+
+        /* ══════════════════════════════════════
+           CULTURE
+        ══════════════════════════════════════ */
+        #culture {
+            padding: 120px 60px;
+            background: var(--cream-dk);
+            position: relative;
+            overflow: hidden;
+        }
+        .culture-inner { max-width: 1200px; margin: 0 auto; }
+        .culture-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+        .culture-quote-block {
+            background: var(--charcoal);
+            padding: 50px 48px;
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+        }
+        .culture-quote-block::before {
+            content: '\201C';
+            position: absolute;
+            top: -20px; left: 20px;
+            font-family: 'Playfair Display', serif;
+            font-size: 12rem;
+            color: rgba(232,86,10,0.1);
+            line-height: 1;
+            pointer-events: none;
+        }
+        .culture-quote {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--cream);
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+        .culture-attr {
+            margin-top: 20px;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--turmeric);
+            position: relative;
+            z-index: 1;
+        }
+        .culture-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 30px;
+        }
+        .culture-mini {
+            background: rgba(255,255,255,0.6);
             padding: 20px;
+            border-radius: 4px;
+            border: 1px solid rgba(0,0,0,0.06);
         }
-
-        h1 {
-            font-size: 4rem;
-            margin: 0;
-            font-weight: 800;
-            letter-spacing: -2px;
-            color: #2d2d2d;
+        .culture-mini-icon { font-size: 1.5rem; margin-bottom: 8px; }
+        .culture-mini-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--charcoal);
+            margin-bottom: 4px;
         }
-
-        .dot {
-            color: #f1c40f; /* Golden Yellow (Like Sev/Farsan) */
+        .culture-mini-text { font-size: 0.82rem; color: var(--text-soft); line-height: 1.5; }
+        .culture-text .section-body { margin-bottom: 30px; }
+        .culture-facts { display: flex; flex-direction: column; gap: 20px; }
+        .culture-fact { display: flex; gap: 20px; align-items: flex-start; }
+        .fact-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--saffron);
+            line-height: 1;
+            min-width: 50px;
         }
-
-        p {
-            font-size: 1.2rem;
-            color: #666;
-            margin-top: 10px;
-            margin-bottom: 40px;
+        .fact-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--charcoal);
+            margin-bottom: 3px;
         }
+        .fact-desc { font-size: 0.85rem; color: var(--text-soft); line-height: 1.6; }
 
-        .line {
-            width: 60px;
-            height: 4px;
-            background-color: #f1c40f;
-            margin: 0 auto 40px auto;
+        /* ══════════════════════════════════════
+           VISION
+        ══════════════════════════════════════ */
+        #vision {
+            padding: 120px 60px;
+            background: var(--cream);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
-
-        .footer {
-            font-size: 0.9rem;
-            color: #888;
+        .vision-pattern { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+        .vision-circle {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid var(--turmeric);
+            opacity: 0.07;
+        }
+        .vision-inner { max-width: 760px; margin: 0 auto; position: relative; z-index: 2; }
+        .vision-inner .section-title { margin-bottom: 30px; }
+        .vision-inner .section-body { margin: 0 auto 50px; }
+        .vision-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 60px;
+        }
+        .vision-chip {
+            padding: 10px 22px;
+            border: 1.5px solid var(--saffron);
+            border-radius: 3px;
+            font-size: 0.82rem;
             font-weight: 500;
             letter-spacing: 1px;
+            color: var(--saffron);
             text-transform: uppercase;
+            transition: background 0.3s, color 0.3s;
+        }
+        .vision-chip:hover { background: var(--saffron); color: #fff; cursor: default; }
+        .vision-quote {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-style: italic;
+            color: var(--text-soft);
+            line-height: 1.7;
+            border-top: 1px solid var(--cream-dk);
+            padding-top: 40px;
         }
 
-        .names {
-            color: #333;
-            font-weight: bold;
+        /* ══════════════════════════════════════
+           NOTIFY / SIGNUP
+        ══════════════════════════════════════ */
+        #notify {
+            padding: 120px 60px;
+            background: linear-gradient(135deg, #3D1000 0%, #1C1C1C 60%, #2A1800 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .notify-bg {
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(circle at 20% 80%, rgba(232,86,10,0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(212,160,23,0.1) 0%, transparent 50%);
+        }
+        .notify-inner {
+            max-width: 680px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        .notify-inner .section-tag { color: var(--turmeric); }
+        .notify-inner .section-title { color: var(--cream); }
+        .notify-inner .section-body { color: rgba(255,255,255,0.55); margin: 20px auto 50px; }
+        .signup-form { display: flex; flex-direction: column; gap: 16px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .form-group { display: flex; flex-direction: column; gap: 6px; text-align: left; }
+        .form-group label {
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.5);
+        }
+        .form-group input, .form-group select {
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 3px;
+            padding: 14px 18px;
+            color: var(--cream);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            transition: border-color 0.3s, background 0.3s;
+            outline: none;
+            width: 100%;
+        }
+        .form-group input::placeholder { color: rgba(255,255,255,0.25); }
+        .form-group input:focus, .form-group select:focus {
+            border-color: var(--saffron);
+            background: rgba(255,255,255,0.1);
+        }
+        .form-group select option { background: #1C1C1C; color: #fff; }
+        .form-submit {
+            background: var(--saffron);
+            color: #fff;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 3px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            width: 100%;
+        }
+        .form-submit:hover { background: #c44700; transform: translateY(-2px); }
+        .form-submit:active { transform: translateY(0); }
+        .form-note { font-size: 0.78rem; color: rgba(255,255,255,0.3); margin-top: 8px; }
+        .success-message {
+            display: none;
+            background: rgba(168,197,160,0.15);
+            border: 1px solid rgba(168,197,160,0.4);
+            border-radius: 4px;
+            padding: 24px;
+            color: #A8C5A0;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* ══════════════════════════════════════
+           FOOTER
+        ══════════════════════════════════════ */
+        footer { background: #111; padding: 60px; }
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 60px;
+            padding-bottom: 50px;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+        }
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--cream);
+        }
+        .footer-logo span { color: var(--turmeric); }
+        .footer-tagline {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.4);
+            line-height: 1.7;
+            max-width: 240px;
+        }
+        .footer-col-title {
+            font-size: 0.72rem;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--turmeric);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        .footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+        .footer-links a { font-size: 0.88rem; color: rgba(255,255,255,0.45); transition: color 0.3s; }
+        .footer-links a:hover { color: var(--saffron-lt); }
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 30px auto 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .footer-copy { font-size: 0.82rem; color: rgba(255,255,255,0.25); }
+        .footer-makers { font-size: 0.82rem; color: rgba(255,255,255,0.35); }
+        .footer-makers strong { color: rgba(255,255,255,0.6); }
+
+        /* ══════════════════════════════════════
+           MOBILE NAV
+        ══════════════════════════════════════ */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 99;
+            background: var(--charcoal);
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 36px;
+        }
+        .mobile-menu.open { display: flex; }
+        .mobile-menu a {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--cream);
+            transition: color 0.3s;
+        }
+        .mobile-menu a:hover { color: var(--saffron); }
+        .mobile-close {
+            position: absolute;
+            top: 28px; right: 36px;
+            font-size: 2rem;
+            color: rgba(255,255,255,0.5);
+            cursor: pointer;
+            line-height: 1;
+            transition: color 0.3s;
+        }
+        .mobile-close:hover { color: var(--saffron); }
+
+        /* ══════════════════════════════════════
+           ANIMATIONS
+        ══════════════════════════════════════ */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: rotate(45deg) translateY(0); }
+            50%       { transform: rotate(45deg) translateY(5px); }
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50%       { transform: scale(1.1); opacity: 1; }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50%       { transform: translateY(-12px); }
+        }
+
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        /* ══════════════════════════════════════
+           RESPONSIVE
+        ══════════════════════════════════════ */
+        @media (max-width: 1024px) {
+            nav { padding: 18px 30px; }
+            nav.scrolled { padding: 12px 30px; }
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            #intro { gap: 30px; padding: 28px 30px; flex-wrap: wrap; }
+            .misal101-header { grid-template-columns: 1fr; gap: 50px; }
+            .misal101-visual { order: -1; }
+            .regions-grid { grid-template-columns: 1fr 1fr; }
+            .culture-grid { grid-template-columns: 1fr; gap: 40px; }
+            .footer-inner { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 768px) {
+            #misal101, #regions, #culture, #vision, #notify, footer { padding: 80px 24px; }
+            .ingredients-grid { grid-template-columns: 1fr 1fr; }
+            .regions-grid { grid-template-columns: 1fr; }
+            .form-row { grid-template-columns: 1fr; }
+            .footer-inner { grid-template-columns: 1fr; gap: 40px; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            #intro { flex-direction: column; gap: 20px; }
+            .intro-sep { display: none; }
+        }
+        @media (max-width: 480px) {
+            .ingredients-grid { grid-template-columns: 1fr; }
+            .culture-cards { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>Coming Soon<span class="dot">.</span></h1>
-        <p>Nashik's favorite dish is getting a new address.</p>
-        
-        <div class="line"></div>
+    <!-- NAV -->
+    <nav id="navbar">
+        <a href="#hero" class="nav-logo">Misal<span>.</span>co.in</a>
+        <ul class="nav-links">
+            <li><a href="#misal101">The Dish</a></li>
+            <li><a href="#regions">Regional</a></li>
+            <li><a href="#culture">Culture</a></li>
+            <li><a href="#vision">Vision</a></li>
+            <li><a href="#notify" class="nav-cta">Stay Updated</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger" aria-label="Open menu">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
 
-        <div class="footer">
-            An initiative by <br>
-            <span class="names">Arnav Patil</span> & <span class="names">Aditya Patil</span>
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <span class="mobile-close" id="mobileClose">&times;</span>
+        <a href="#misal101" class="mobile-link">The Dish</a>
+        <a href="#regions"  class="mobile-link">Regional</a>
+        <a href="#culture"  class="mobile-link">Culture</a>
+        <a href="#vision"   class="mobile-link">Vision</a>
+        <a href="#notify"   class="mobile-link">Stay Updated</a>
+    </div>
+
+    <!-- HERO -->
+    <section id="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-pattern"></div>
+        <div class="hero-dots"></div>
+        <div class="hero-content">
+            <p class="hero-marathi">महाराष्ट्राचा आत्मा</p>
+            <h1 class="hero-title">Maharashtra's<br><em>Soul in a Bowl.</em></h1>
+            <p class="hero-subtitle">One dish. Centuries of tradition. A thousand variations. Misal is not just food — it is how Maharashtra wakes up every morning.</p>
+            <div class="hero-divider"></div>
+            <div class="hero-btns">
+                <a href="#misal101" class="btn-primary">Discover Misal</a>
+                <a href="#notify" class="btn-outline">Stay Updated</a>
+            </div>
+        </div>
+        <div class="scroll-hint">
+            <span>Scroll</span>
+            <div class="arrow"></div>
+        </div>
+    </section>
+
+    <!-- STATS BAND -->
+    <div id="intro">
+        <div class="intro-stat">
+            <span class="num">500+</span>
+            <span class="label">Years of History</span>
+        </div>
+        <div class="intro-sep"></div>
+        <div class="intro-stat">
+            <span class="num">4</span>
+            <span class="label">Regional Styles</span>
+        </div>
+        <div class="intro-sep"></div>
+        <div class="intro-stat">
+            <span class="num">&#8734;</span>
+            <span class="label">Recipes &amp; Secrets</span>
+        </div>
+        <div class="intro-sep"></div>
+        <div class="intro-stat">
+            <span class="num">1</span>
+            <span class="label">True Identity</span>
         </div>
     </div>
 
+    <!-- MISAL 101 -->
+    <section id="misal101">
+        <div class="misal101-inner">
+            <div class="misal101-header">
+                <div class="misal101-text">
+                    <span class="section-tag reveal">The Anatomy of a Classic</span>
+                    <h2 class="section-title reveal reveal-delay-1">What is<br>Misal, really?</h2>
+                    <div class="ornament reveal reveal-delay-2">
+                        <div class="ornament-line"></div>
+                        <div class="ornament-diamond"></div>
+                        <div class="ornament-line"></div>
+                    </div>
+                    <p class="section-body reveal reveal-delay-2">
+                        At its heart, Misal is a fiery sprout curry — <em>usal</em> — made from moth beans or mixed sprouts, slow-cooked in a deeply spiced gravy. It is crowned with crispy farsan, fresh onions, a squeeze of lemon, and a generous ladle of tarri — the floating orange-red spiced oil that defines its character. Served with soft pav, it is a complete universe in a single bowl.
+                    </p>
+                    <p class="section-body reveal reveal-delay-3" style="margin-top: 16px;">
+                        Simple on the surface. Infinitely complex underneath. That is the beauty of Misal.
+                    </p>
+                </div>
+                <div class="misal101-visual reveal">
+                    <div class="bowl">
+                        <div class="bowl-glow"></div>
+                        <div class="bowl-body">
+                            <div class="bowl-liquid"></div>
+                        </div>
+                        <div class="bowl-rim"></div>
+                        <div class="bowl-farsan">
+                            <div class="sev-line" style="width:60px;top:10px;left:30px;transform:rotate(-5deg);"></div>
+                            <div class="sev-line" style="width:80px;top:20px;left:20px;transform:rotate(3deg);"></div>
+                            <div class="sev-line" style="width:50px;top:30px;left:50px;transform:rotate(-8deg);"></div>
+                            <div class="sev-line" style="width:40px;top:5px;left:60px;transform:rotate(12deg);"></div>
+                            <div class="farsan-dot" style="width:10px;height:10px;top:8px;left:15px;"></div>
+                            <div class="farsan-dot" style="width:7px;height:7px;top:25px;left:80px;background:#E8560A;"></div>
+                            <div class="farsan-dot" style="width:12px;height:12px;top:15px;left:100px;background:#C8891F;"></div>
+                            <div class="farsan-dot" style="width:6px;height:6px;top:35px;left:30px;background:rgba(255,255,255,0.5);"></div>
+                        </div>
+                        <div class="bowl-plate"></div>
+                        <div class="bowl-pav"></div>
+                        <div class="bowl-lemon"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="ingredients-grid">
+                <div class="ingredient-card reveal">
+                    <span class="ing-icon">&#127807;</span>
+                    <div class="ing-name">Matki Usal</div>
+                    <p class="ing-desc">The soul of Misal. Sprouted moth beans slow-cooked in a thick, aromatic base of onions, coconut, and Maharashtrian spices.</p>
+                </div>
+                <div class="ingredient-card reveal reveal-delay-1">
+                    <span class="ing-icon">&#127798;</span>
+                    <div class="ing-name">Tarri (Kat)</div>
+                    <p class="ing-desc">The fiery red-orange oil that floats on top. The more tarri, the more serious the Misal. This is where the heat lives.</p>
+                </div>
+                <div class="ingredient-card reveal reveal-delay-2">
+                    <span class="ing-icon">&#10024;</span>
+                    <div class="ing-name">Farsan &amp; Sev</div>
+                    <p class="ing-desc">The crispy, crunchy topping — chiwda, thin sev, and farsan — that gives Misal its legendary texture contrast.</p>
+                </div>
+                <div class="ingredient-card reveal reveal-delay-1">
+                    <span class="ing-icon">&#129381;</span>
+                    <div class="ing-name">Kanda-Tomato</div>
+                    <p class="ing-desc">Fresh chopped onions and tomatoes added raw on top, providing the essential coolness to counter the heat.</p>
+                </div>
+                <div class="ingredient-card reveal reveal-delay-2">
+                    <span class="ing-icon">&#127819;</span>
+                    <div class="ing-name">Lemon Squeeze</div>
+                    <p class="ing-desc">That final squeeze of lemon that brightens every flavour and ties the whole bowl together. Non-negotiable.</p>
+                </div>
+                <div class="ingredient-card reveal reveal-delay-3">
+                    <span class="ing-icon">&#127838;</span>
+                    <div class="ing-name">Ladi Pav</div>
+                    <p class="ing-desc">The soft, pillowy companion. Torn and dunked into the gravy, it is the perfect instrument to finish every last drop.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- REGIONAL WARS -->
+    <section id="regions">
+        <div class="regions-bg-pattern"></div>
+        <div class="regions-inner">
+            <div class="regions-header">
+                <span class="section-tag reveal">Across the State</span>
+                <h2 class="section-title reveal reveal-delay-1">The Regional Wars</h2>
+                <div class="ornament reveal reveal-delay-2" style="justify-content:center;">
+                    <div class="ornament-line"></div>
+                    <div class="ornament-diamond"></div>
+                    <div class="ornament-line"></div>
+                </div>
+                <p class="section-body reveal reveal-delay-2">Every region of Maharashtra will tell you theirs is the best. They are all right.</p>
+            </div>
+            <div class="regions-grid">
+                <div class="region-card reveal">
+                    <div class="region-accent"></div>
+                    <div class="region-city">Pune</div>
+                    <span class="region-variety">Puneri Misal</span>
+                    <div class="heat-meter">
+                        <div class="heat-dot active"></div>
+                        <div class="heat-dot active"></div>
+                        <div class="heat-dot"></div>
+                        <div class="heat-dot"></div>
+                        <div class="heat-dot"></div>
+                        <span style="font-size:0.72rem;color:rgba(255,255,255,0.35);margin-left:8px;letter-spacing:1px;">MEDIUM</span>
+                    </div>
+                    <p class="region-desc">The original, refined and balanced. A slightly sweet, mildly spiced usal with a thin tarri. Famous for the Chitale and Bedekar varieties. The standard by which all others are judged.</p>
+                    <span class="region-tag">The Classic</span>
+                </div>
+                <div class="region-card reveal reveal-delay-1">
+                    <div class="region-accent"></div>
+                    <div class="region-city">Nashik</div>
+                    <span class="region-variety">Nashik Misal</span>
+                    <div class="heat-meter">
+                        <div class="heat-dot active"></div>
+                        <div class="heat-dot active"></div>
+                        <div class="heat-dot active"></div>
+                        <div class="heat-dot"></div>
+                        <div class="heat-dot"></div>
+                        <span style="font-size:0.72rem;color:rgba(255,255,255,0.35);margin-left:8px;letter-spacing:1px;">SPICY</span>
+                    </div>
+                    <p class="region-desc">Bolder and more robust than Pune. The usal is richer, the tarri is thicker, and the flavours are more intense. Nashik Misal is unapologetically itself — and proud of it.</p>
+                    <span class="region-tag" style="border-color:var(--saffron);color:var(--saffron-lt);">Our Home</span>
+                </div>
+                <div class="region-card reveal reveal-delay-2">
+                    <div class="region-accent"></div>
+                    <div class="region-city">Kolhapur</div>
+                    <span class="region-variety">Kolhapuri Misal</span>
+                    <div class="heat-meter">
+                        <div class="heat-dot active red"></div>
+                        <div class="heat-dot active red"></div>
+                        <div class="heat-dot active red"></div>
+                        <div class="heat-dot active red"></div>
+                        <div class="heat-dot active red"></div>
+                        <span style="font-size:0.72rem;color:var(--red);margin-left:8px;letter-spacing:1px;">LEGENDARY</span>
+                    </div>
+                    <p class="region-desc">Not for the faint of heart. The Kolhapuri version uses the fiery Kolhapuri masala — a dark, deeply complex spice blend — making it the most intimidating and revered Misal in Maharashtra.</p>
+                    <span class="region-tag">The Legend</span>
+                </div>
+                <div class="region-card reveal reveal-delay-3">
+                    <div class="region-accent"></div>
+                    <div class="region-city">Mumbai</div>
+                    <span class="region-variety">Mumbai Misal</span>
+                    <div class="heat-meter">
+                        <div class="heat-dot active"></div>
+                        <div class="heat-dot active"></div>
+                        <div class="heat-dot active"></div>
+                        <div class="heat-dot active"></div>
+                        <div class="heat-dot"></div>
+                        <span style="font-size:0.72rem;color:rgba(255,255,255,0.35);margin-left:8px;letter-spacing:1px;">HOT</span>
+                    </div>
+                    <p class="region-desc">Street energy in a bowl. Mumbai Misal is chaotic and wonderful — loaded high with extra farsan, topped with everything, eaten on the go. It is the city in food form: fast, layered, unforgettable.</p>
+                    <span class="region-tag">The Chaos</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CULTURE -->
+    <section id="culture">
+        <div class="culture-inner">
+            <div class="culture-grid">
+                <div>
+                    <div class="culture-quote-block reveal">
+                        <p class="culture-quote">"In Maharashtra, a bowl of Misal in the morning is not breakfast. It is a state of mind."</p>
+                        <p class="culture-attr">— The Misal Philosophy</p>
+                    </div>
+                    <div class="culture-cards reveal reveal-delay-1">
+                        <div class="culture-mini">
+                            <div class="culture-mini-icon">&#127994;</div>
+                            <div class="culture-mini-title">The Matka</div>
+                            <p class="culture-mini-text">Served in a clay pot at traditional eateries, the earthen vessel adds its own subtle flavour to the gravy.</p>
+                        </div>
+                        <div class="culture-mini">
+                            <div class="culture-mini-icon">&#128240;</div>
+                            <div class="culture-mini-title">The Ritual</div>
+                            <p class="culture-mini-text">A plate of Misal, a folded newspaper, and a glass of chai. The classic Maharashtrian morning scene.</p>
+                        </div>
+                        <div class="culture-mini">
+                            <div class="culture-mini-icon">&#128104;&#8205;&#128105;&#8205;&#128103;&#8205;&#128102;</div>
+                            <div class="culture-mini-title">The Queue</div>
+                            <p class="culture-mini-text">A great Misal spot always has a line. The queue itself is a social institution — strangers become regulars.</p>
+                        </div>
+                        <div class="culture-mini">
+                            <div class="culture-mini-icon">&#129296;</div>
+                            <div class="culture-mini-title">The Secret</div>
+                            <p class="culture-mini-text">Every iconic Misal stall has a masala recipe passed down through generations, guarded fiercely.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="culture-text">
+                    <span class="section-tag reveal">More than food</span>
+                    <h2 class="section-title reveal reveal-delay-1">The Misal<br>Way of Life</h2>
+                    <div class="ornament reveal reveal-delay-2">
+                        <div class="ornament-line"></div>
+                        <div class="ornament-diamond"></div>
+                        <div class="ornament-line"></div>
+                    </div>
+                    <p class="section-body reveal reveal-delay-2">
+                        Misal is deeply woven into the social fabric of Maharashtra. It is the dish that brings together the labourer and the businessman, the student and the professor — all standing at the same counter, eating from the same menu.
+                    </p>
+                    <div class="culture-facts reveal reveal-delay-3">
+                        <div class="culture-fact">
+                            <span class="fact-num">01</span>
+                            <div>
+                                <div class="fact-title">A Morning Tradition</div>
+                                <p class="fact-desc">Misal is quintessentially a breakfast dish. By noon at most legendary spots, the vessel is empty. You either show up early, or you wait till tomorrow.</p>
+                            </div>
+                        </div>
+                        <div class="culture-fact">
+                            <span class="fact-num">02</span>
+                            <div>
+                                <div class="fact-title">The Debate Never Ends</div>
+                                <p class="fact-desc">Ask any Maharashtrian which Misal is best and you will start an argument that lasts for hours. The debate is part of the culture.</p>
+                            </div>
+                        </div>
+                        <div class="culture-fact">
+                            <span class="fact-num">03</span>
+                            <div>
+                                <div class="fact-title">Generational Loyalty</div>
+                                <p class="fact-desc">Families have been eating at the same Misal stall for three generations. When a legendary spot closes, it makes the news.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VISION -->
+    <section id="vision">
+        <div class="vision-pattern">
+            <div class="vision-circle" style="width:600px;height:600px;top:-200px;right:-150px;"></div>
+            <div class="vision-circle" style="width:400px;height:400px;bottom:-100px;left:-100px;"></div>
+            <div class="vision-circle" style="width:200px;height:200px;top:50%;left:10%;"></div>
+        </div>
+        <div class="vision-inner">
+            <span class="section-tag reveal">Something is Cooking</span>
+            <h2 class="section-title reveal reveal-delay-1">We Are Building<br>Something for Nashik.</h2>
+            <div class="ornament reveal reveal-delay-2" style="justify-content:center;">
+                <div class="ornament-line"></div>
+                <div class="ornament-diamond"></div>
+                <div class="ornament-line"></div>
+            </div>
+            <p class="section-body reveal reveal-delay-2">
+                Nashik deserves a Misal experience that honours its heritage — bold, unapologetic, and deeply rooted. We are working on something that celebrates not just the dish, but the culture and the community behind it.
+            </p>
+            <div class="vision-chips reveal reveal-delay-3">
+                <span class="vision-chip">Nashik's Heritage</span>
+                <span class="vision-chip">Authentic Flavours</span>
+                <span class="vision-chip">Community First</span>
+                <span class="vision-chip">Modern Experience</span>
+                <span class="vision-chip">True to the Roots</span>
+            </div>
+            <p class="vision-quote reveal reveal-delay-4">"The best Misal you have ever had<br>is the one you are about to have."</p>
+        </div>
+    </section>
+
+    <!-- NOTIFY -->
+    <section id="notify">
+        <div class="notify-bg"></div>
+        <div class="notify-inner">
+            <span class="section-tag reveal">Be the First to Know</span>
+            <h2 class="section-title reveal reveal-delay-1">Stay in the Loop.</h2>
+            <div class="ornament reveal reveal-delay-2" style="justify-content:center;">
+                <div class="ornament-line" style="background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);"></div>
+                <div class="ornament-diamond" style="background:var(--turmeric);"></div>
+                <div class="ornament-line" style="background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);"></div>
+            </div>
+            <p class="section-body reveal reveal-delay-2">
+                We are working hard behind the scenes. Be the first in Nashik to know when we launch — drop your details below and we will reach out personally.
+            </p>
+
+            <!--
+                FORMSPREE SETUP — 5 minutes:
+                1. Go to https://formspree.io and sign up free
+                2. Click "New Form", name it "Misal Contacts"
+                3. Copy your endpoint (e.g. https://formspree.io/f/xabcdefg)
+                4. Replace YOUR_FORMSPREE_ID below with your actual ID
+                All contacts will be saved in your Formspree dashboard + emailed to you.
+            -->
+            <form class="signup-form reveal reveal-delay-3" id="contactForm"
+                  action="https://formspree.io/f/xqeyewqj"
+                  method="POST">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" placeholder="Arjun Deshpande" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+91 98765 43210">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="arjun@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="area">Your Area in Nashik</label>
+                        <select id="area" name="area">
+                            <option value="" disabled selected>Select your area</option>
+                            <option>Gangapur Road</option>
+                            <option>College Road</option>
+                            <option>Panchavati</option>
+                            <option>Satpur</option>
+                            <option>Nashik Road</option>
+                            <option>Cidco</option>
+                            <option>Indira Nagar</option>
+                            <option>Deolali</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="message">What do you love about Misal? (optional)</label>
+                    <input type="text" id="message" name="message" placeholder="The tarri, obviously...">
+                </div>
+                <input type="text" name="_gotcha" style="display:none">
+                <input type="hidden" name="_subject" value="New Misal.co.in signup!">
+                <button type="submit" class="form-submit" id="submitBtn">Notify Me When You Launch</button>
+                <p class="form-note">We respect your privacy. No spam, ever. Just Misal.</p>
+            </form>
+            <div class="success-message" id="successMsg">
+                <strong>&#128591; Thank you!</strong><br>
+                You are on the list. We will reach out personally when we are ready to launch. Get ready for the best Misal of your life.
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-inner">
+            <div>
+                <div class="footer-logo">Misal<span>.</span>co.in</div>
+                <p class="footer-tagline">Celebrating Maharashtra's most beloved dish — one bowl at a time. Coming to Nashik.</p>
+            </div>
+            <div>
+                <div class="footer-col-title">Explore</div>
+                <ul class="footer-links">
+                    <li><a href="#misal101">What is Misal?</a></li>
+                    <li><a href="#regions">Regional Varieties</a></li>
+                    <li><a href="#culture">The Culture</a></li>
+                    <li><a href="#vision">Our Vision</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title">Connect</div>
+                <ul class="footer-links">
+                    <li><a href="#notify">Get Notified</a></li>
+                    <li><a href="mailto:hello@misal.co.in">hello@misal.co.in</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Nashik, Maharashtra</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p class="footer-copy">&copy; 2026 Misal.co.in &mdash; All rights reserved.</p>
+            <p class="footer-makers">An initiative by <strong>Arnav Patil</strong> &amp; <strong>Aditya Patil</strong></p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 60);
+        });
+
+        // Mobile menu
+        document.getElementById('hamburger').addEventListener('click', () => {
+            document.getElementById('mobileMenu').classList.add('open');
+        });
+        document.getElementById('mobileClose').addEventListener('click', () => {
+            document.getElementById('mobileMenu').classList.remove('open');
+        });
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('mobileMenu').classList.remove('open');
+            });
+        });
+
+        // Scroll reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Form submission via Formspree AJAX
+        const form = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const successMsg = document.getElementById('successMsg');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const action = form.getAttribute('action');
+            if (action.includes('xqeyewej')) {
+                alert('Form not yet configured.\n\nSetup steps:\n1. Go to formspree.io and create a free account\n2. Create a new form named "Misal Contacts"\n3. Copy your form ID\n4. Replace YOUR_FORMSPREE_ID in the HTML with your actual ID\n\nAll submissions will then be stored in your dashboard.');
+                return;
+            }
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+            try {
+                const response = await fetch(action, {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: { 'Accept': 'application/json' }
+                });
+                if (response.ok) {
+                    form.style.display = 'none';
+                    successMsg.style.display = 'block';
+                } else {
+                    throw new Error();
+                }
+            } catch {
+                submitBtn.textContent = 'Notify Me When You Launch';
+                submitBtn.disabled = false;
+                alert('Something went wrong. Please try again or email hello@misal.co.in');
+            }
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
 </body>
 </html>
