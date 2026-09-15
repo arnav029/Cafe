@@ -441,7 +441,7 @@ input[type="range"]::-moz-range-thumb {
 }
 .more summary::-webkit-details-marker { display: none; }
 .more summary::before { content: "+"; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--ink); color: var(--paper); font-size: .95rem; transition: transform .2s; }
-.more[open] summary::before { content: "–"; }
+.more[open] summary::before { content: "−"; }
 .more[open] summary { margin-bottom: 16px; }
 .credit { display: flex; align-items: center; gap: 9px; margin: -4px 0 16px; font-size: .96rem; cursor: pointer; }
 .credit input { accent-color: var(--kat); width: 18px; height: 18px; margin: 0; }

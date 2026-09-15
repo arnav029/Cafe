@@ -249,10 +249,10 @@
 
     /* ───────── Kat meter ───────── */
     const LEVELS = [
-        { mr: 'कमी तिखट', en: 'Kami tikhat — go easy, please.', note: 'No judgement. (Some judgement.) We\'ll keep the kat on the side for you.' },
-        { mr: 'मध्यम',    en: 'Madhyam — pleasantly warm.',       note: 'A gentle glow. The kind of spice that lets you still hold a conversation.' },
-        { mr: 'तिखट',     en: 'Tikhat — a respectable Nashik starting point.', note: 'You\'ll sweat a little. You\'ll order a second pav. This is healthy.' },
-        { mr: 'झणझणीत',   en: 'Jhanjhanit — now we\'re talking.', note: 'Nose running, eyes watering, reaching for more kat anyway. Welcome home.' },
+        { mr: 'कमी तिखट', en: 'Kami tikhat. Go easy, please.', note: 'No judgement. (Some judgement.) We\'ll keep the kat on the side for you.' },
+        { mr: 'मध्यम',    en: 'Madhyam. Pleasantly warm.',       note: 'A gentle glow. The kind of spice that lets you still hold a conversation.' },
+        { mr: 'तिखट',     en: 'Tikhat. A respectable Nashik starting point.', note: 'You\'ll sweat a little. You\'ll order a second pav. This is healthy.' },
+        { mr: 'झणझणीत',   en: 'Jhanjhanit. Now we\'re talking.', note: 'Nose running, eyes watering, reaching for more kat anyway. Welcome home.' },
         { mr: 'डोळ्यांत पाणी', en: 'Tears. Actual tears.', note: 'Nashik level. Your ancestors are proud. Your stomach has filed a complaint.' },
     ];
     const katSection = $('#kat');
@@ -267,7 +267,7 @@
         $('#verdict-mr').textContent = L.mr;
         $('#verdict-en').textContent = L.en;
         $('#verdict-note').textContent = L.note;
-        heat.setAttribute('aria-valuetext', L.en.split(' —')[0]);
+        heat.setAttribute('aria-valuetext', L.en.split('.')[0]);
     };
     heat.addEventListener('input', () => setHeat(Number(heat.value)));
     setHeat(Number(heat.value));
@@ -321,7 +321,7 @@
         const email = $('#f-email');
         if (!place.value.trim()) return showError('Which place? We need a name to go find it.', place);
         if (!area.value.trim()) return showError('Roughly where is it? An area or landmark is enough.', area);
-        if (!why.value.trim()) return showError('Sell it to us — what makes it good?', why);
+        if (!why.value.trim()) return showError('Sell it to us. What makes it good?', why);
         if (!maps.validity.valid) return showError('That Maps link doesn\'t look right. Paste the full link, or leave it blank.', maps);
         if (!email.validity.valid) {
             more.open = true;
